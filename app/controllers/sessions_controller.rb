@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :log_required
+
   def new
   end
 
@@ -12,6 +14,12 @@ class SessionsController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    reset_session
+    redirect_to root_url, notice: 'ログアウトしました。'
+  end
+
 
   private
 

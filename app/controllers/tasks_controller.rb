@@ -16,7 +16,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new(task_params)
+    task = Task.new(task_params.merge(user_id: current_user.id))
     task.save!
     redirect_to tasks_url, notice: "タスク「#{task.name}」を登録しました。"
   end
